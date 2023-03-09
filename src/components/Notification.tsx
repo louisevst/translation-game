@@ -33,7 +33,7 @@ function Notification({ title, text, show, onClose }: NotificationProps) {
     return null;
   }
   return (
-    <div className="fixed top-0 right-0 p-4 m-4 bg-gray-200 w-[90%] md:w-[70%] lg:w-[40%]">
+    <div className="fixed top-0 right-0 p-4 m-4 bg-gray-200 w-[90%] md:w-[70%] lg:w-[40%] z-50 rounded-lg">
       <button className="fixed top-5 right-5" onClick={toggleNotification}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

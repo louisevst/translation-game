@@ -1,7 +1,11 @@
-import Test from "./components/test";
+import Game from "./components/Game";
 
 function App() {
-  return <Test />;
+  return (
+    <>
+      <Game />
+    </>
+  );
 }
 
 export default App;

@@ -9,12 +9,23 @@ const translation: Translation[] = [
   new Translation("plate", "assiette"),
   new Translation("fork", "fourchette"),
   new Translation("easy", "facile"),
-  new Translation("annoying", "ennuyeux"),
+  new Translation("happy", "heureux"),
+  new Translation("wedding", "mariage"),
+  new Translation("sad", "triste"),
+  new Translation("hard", "dur"),
+  new Translation("nightmare", "cauchemard"),
 ];
 let translations: Translation[] = [
   new Translation("alligator", "crocodile"),
   new Translation("apple", "pomme"),
-  // add more translations here
+  new Translation("plate", "assiette"),
+  new Translation("fork", "fourchette"),
+  new Translation("easy", "facile"),
+  new Translation("happy", "heureux"),
+  new Translation("wedding", "mariage"),
+  new Translation("sad", "triste"),
+  new Translation("hard", "dur"),
+  new Translation("nightmare", "cauchemard"),
 ];
 
 function Game() {
@@ -24,15 +35,24 @@ function Game() {
   const [showNotification, setShowNotification] = useState(false);
   const [notificationTitle, setNotificationTitle] = useState("");
   const [notificationText, setNotificationText] = useState("");
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState(
+    localStorage.getItem("score")
+      ? JSON.parse(localStorage.getItem("score"))
+      : 0
+  );
 
   function startGame() {
+    console.log(localStorage.getItem("translation"));
+    if (localStorage.getItem("translation")) {
+      translations = JSON.parse(localStorage.getItem("translation"));
+    }
     const randomIndex = Math.floor(Math.random() * translations.length);
     setCurrentTranslation(translations[randomIndex]);
     setUserAnswer("");
   }
   function reset() {
     translations = translation;
+    localStorage.clear();
     setScore(0);
     startGame();
   }
@@ -44,6 +64,7 @@ function Game() {
       // user answered correctly
       // show notification and start a new game
       setScore(score + 100);
+      localStorage.setItem("score", JSON.stringify(score + 100));
       setShowNotification(true);
       setNotificationTitle("Congratulation !");
       setNotificationText("Right answer");
@@ -51,6 +72,7 @@ function Game() {
       if (index !== -1) {
         translations.splice(index, 1);
       }
+      localStorage.setItem("translation", JSON.stringify(translations));
       startGame();
     } else {
       if (showNotification) {
@@ -58,6 +80,7 @@ function Game() {
       }
       if (score - 10 >= 0) {
         setScore(score - 10);
+        localStorage.setItem("score", JSON.stringify(score - 10));
       } else setScore(0);
       // user answered incorrectly
       // show notification
@@ -93,7 +116,8 @@ function Game() {
                 className="bg-rose-900 py-2 px-8 rounded-xl text-white"
               />
             </div>
-            <h1 className="text-2xl text-[#4e4d5c] p-4">Translate the word</h1>
+            <h1 className="text-2xl text-[#4e4d5c]">Translate the word</h1>
+            <h5 className="pb-4 text-[#4e4d5c]">To french</h5>
             <p className="text-xl">{currentTranslation.word}</p>
             <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] rotate-180">
               <svg

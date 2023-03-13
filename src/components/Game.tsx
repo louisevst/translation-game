@@ -29,6 +29,7 @@ let translations: Translation[] = [
 ];
 
 function Game() {
+  const scoreJson = localStorage.getItem("score");
   const [currentTranslation, setCurrentTranslation] =
     useState<Translation | null>(null);
   const [userAnswer, setUserAnswer] = useState("");
@@ -36,16 +37,12 @@ function Game() {
   const [notificationTitle, setNotificationTitle] = useState("");
   const [notificationText, setNotificationText] = useState("");
   const [score, setScore] = useState(
-    localStorage.getItem("score")
-      ? JSON.parse(localStorage.getItem("score"))
-      : 0
+    scoreJson !== null ? JSON.parse(scoreJson) : 0
   );
 
   function startGame() {
-    console.log(localStorage.getItem("translation"));
-    if (localStorage.getItem("translation")) {
-      translations = JSON.parse(localStorage.getItem("translation"));
-    }
+    const tradJson = localStorage.getItem("translation");
+    translations = tradJson !== null ? JSON.parse(tradJson) : translations;
     const randomIndex = Math.floor(Math.random() * translations.length);
     setCurrentTranslation(translations[randomIndex]);
     setUserAnswer("");

@@ -56,7 +56,8 @@ function Game() {
   function checkAnswer() {
     if (
       currentTranslation &&
-      userAnswer === currentTranslation.translatedWord
+      userAnswer.replace(/ /g, "").toLocaleLowerCase() ===
+        currentTranslation.translatedWord
     ) {
       // user answered correctly
       // show notification and start a new game

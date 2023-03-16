@@ -111,7 +111,7 @@ function Game() {
               <Button
                 onClick={() => reset()}
                 name="Reset"
-                className="bg-rose-900 py-2 px-8 rounded-xl text-white"
+                className="bg-rose-900 py-2 px-8 rounded-xl text-white hover:bg-white border hover:text-rose-900 hover:border-rose-900"
               />
             </div>
             <h1 className="text-2xl text-[#4e4d5c]">Translate the word</h1>
@@ -144,7 +144,7 @@ function Game() {
                 checkAnswer();
               }}
               name="Check"
-              className="bg-[#e2b6cf] py-2 px-8 text-lg rounded-xl"
+              className="bg-[#CE7B91] py-2 px-8 text-lg rounded-xl text-white border hover:bg-white/60 hover:text-[#CE7B91] border-[#CE7B91] "
             />
           </section>
         </div>
